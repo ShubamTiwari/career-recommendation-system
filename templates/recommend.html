@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education Recommendation System</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar */
+    .mynav {
+      background: linear-gradient(90deg, #000, #434343);
+      color: #fff;
+      padding: 22px;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 0 0 25px 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .mynav h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Container */
+    .container {
+      margin-top: 70px;
+      max-width: 950px;
+    }
+
+    /* Card (Glassmorphism effect) */
+    .card {
+      border-radius: 20px;
+      padding: 45px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 1.1s ease;
+    }
+
+    /* Headings */
+    .card h2 {
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #222;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .card h5 {
+      font-weight: 700;
+      color: #007bff;
+      margin-top: 35px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #007bff33;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+
+    /* Labels & Inputs */
+    label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Custom Button */
+    .btn-custom {
+      background: linear-gradient(135deg, #000, #2f2f2f);
+      color: white;
+      font-weight: 600;
+      border-radius: 30px;
+      padding: 14px 40px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-custom:hover {
+      background: linear-gradient(135deg, #2f2f2f, #000);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .mynav h1 {
+        font-size: 1.5rem;
+      }
+      .card {
+        padding: 30px;
+      }
+      .btn-custom {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="mynav">
+    <h1>🎓 Education Recommendation System</h1>
+  </div>
+
+  <!-- Form Section -->
+  <div class="container">
+    <div class="card">
+      <h2>Fill in Your Details</h2>
+      <form method="post" action="/pred">
+        <div class="row g-4">
+
+          <!-- Gender -->
+          <div class="col-md-6">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" class="form-control" required>
+              <option value="" disabled selected>Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- Part Time Job -->
+          <div class="col-md-6">
+            <label for="part_time_job">Part-Time Job</label>
+            <select id="part_time_job" name="part_time_job" class="form-control" required>
+              <option value="" disabled selected>Select option</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
+          </div>
+
+          <!-- Absence Days -->
+          <div class="col-md-6">
+            <label for="absence_days">Absence Days</label>
+            <input type="number" id="absence_days" name="absence_days" class="form-control" placeholder="Enter number of absent days">
+          </div>
+
+          <!-- Extracurricular -->
+          <div class="col-md-6">
+            <label for="extracurricular_activities">Extracurricular Activities</label>
+            <select id="extracurricular_activities" name="extracurricular_activities" class="form-control">
+              <option value="" disabled selected>Select option</option>
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
+          </div>
+
+          <!-- Self Study -->
+          <div class="col-md-6">
+            <label for="weekly_self_study_hours">Weekly Self Study Hours</label>
+            <input type="number" id="weekly_self_study_hours" name="weekly_self_study_hours" class="form-control" placeholder="Hours per week">
+          </div>
+
+          <!-- Academic Scores Section -->
+          <div class="col-12">
+            <h5>📘 Academic Scores</h5>
+          </div>
+
+          <div class="col-md-6">
+            <label for="math_score">Math</label>
+            <input type="number" id="math_score" name="math_score" class="form-control score-input">
+          </div>
+          <div class="col-md-6">
+            <label for="history_score">History</label>
+            <input type="number" id="history_score" name="history_score" class="form-control score-input">
+          </div>
+          <div class="col-md-6">
+            <label for="physics_score">Physics</label>
+            <input type="number" id="physics_score" name="physics_score" class="form-control score-input">
+          </div>
+          <div class="col-md-6">
+            <label for="chemistry_score">Chemistry</label>
+            <input type="number" id="chemistry_score" name="chemistry_score" class="form-control score-input">
+          </div>
+          <div class="col-md-6">
+            <label for="biology_score">Biology</label>
+            <input type="number" id="biology_score" name="biology_score" class="form-control score-input">
+          </div>
+          <div class="col-md-6">
+            <label for="english_score">English</label>
+            <input type="number" id="english_score" name="english_score" class="form-control score-input">
+          </div>
+          <div class="col-md-6">
+            <label for="geography_score">Geography</label>
+            <input type="number" id="geography_score" name="geography_score" class="form-control score-input">
+          </div>
+
+          <!-- Total and Average -->
+          <div class="col-md-6">
+            <label for="total_score">Total Score</label>
+            <input type="number" id="total_score" name="total_score" class="form-control" readonly>
+          </div>
+          <div class="col-md-6">
+            <label for="avg_score">Average Score</label>
+            <input type="number" id="avg_score" name="avg_score" class="form-control" readonly>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-custom">✨ Get Recommendations</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Auto Calculate Scores -->
+  <script>
+    const scoreInputs = document.querySelectorAll(".score-input");
+    const totalScoreField = document.getElementById("total_score");
+    const avgScoreField = document.getElementById("avg_score");
+
+    function calculateScores() {
+      let total = 0;
+      let count = 0;
+      scoreInputs.forEach(input => {
+        const val = parseFloat(input.value);
+        if (!isNaN(val)) {
+          total += val;
+          count++;
+        }
+      });
+      totalScoreField.value = total || "";
+      avgScoreField.value = count > 0 ? (total / count).toFixed(2) : "";
+    }
+
+    scoreInputs.forEach(input => input.addEventListener("input", calculateScores));
+  </script>
+</body>
+</html>
